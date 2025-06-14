@@ -1,5 +1,5 @@
 // Número do WhatsApp (substitua apenas aqui)
-const numeroWhatsApp = '5511999999999'; // Exemplo: 5511999999999
+const numeroWhatsApp = '5513988742646'; // Exemplo: 5511999999999
 
 // Rolagem suave para links âncora do menu
 document.querySelectorAll('a[href^="#"]').forEach(link => {
@@ -71,7 +71,7 @@ formOrcamento.addEventListener('submit', function (e) {
   const mensagem = `Olá, gostaria de um orçamento.\n\nTipo de serviço: ${servico}\nNome: ${nome}\nEndereço: ${endereco}\nTelefone: ${telefone}`;
 
   // Gera URL do WhatsApp com mensagem codificada
-  const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+  const url = `https://wa.me/${5513988742646}?text=${encodeURIComponent(mensagem)}`;
 
   // Abre o link em nova aba
   window.open(url, '_blank');
