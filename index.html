@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Texera Construções</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>Texera Construções</h1>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#orcamento">Peça um Orçamento</a></li>
+        <li><a href="#galeria">Galeria de Fotos</a></li>
+        <li><a href="#trabalhe">Trabalhe Conosco</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="sobre">
+      <h2>Sobre Nós</h2>
+      <p>
+        Somos especialistas em construção civil com mais de 20 anos de experiência no mercado. 
+        Executamos todo tipo de obra, da fundação ao acabamento. Realizamos reparos emergenciais como troca de resistência de chuveiro, sanamos vazamentos, infiltrações, fazemos limpeza de telhados, entre outros serviços.
+      </p>
+      <div class="destaques-servicos">
+        <h3>Principais Serviços</h3>
+        <ul>
+          <li>🏗️ Fundação e Estrutura</li>
+          <li>🛠️ Acabamentos em geral</li>
+          <li>🚿 Troca de resistência de chuveiro</li>
+          <li>💧 Reparo de vazamentos e infiltrações</li>
+          <li>🧹 Limpeza e manutenção de telhados</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="orcamento">
+      <h2>Peça um Orçamento</h2>
+      <p>Clique no botão abaixo e preencha o formulário para receber seu orçamento personalizado.</p>
+      <button id="btnAbrirFormulario" aria-label="Abrir formulário de orçamento">Solicitar Orçamento</button>
+
+      <form id="formOrcamento" class="hidden" aria-label="Formulário para solicitar orçamento">
+        <label for="servico">Tipo de Serviço:</label>
+        <input type="text" id="servico" name="servico" placeholder="Ex: Reforma, Construção" required />
+
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro" required />
+
+        <label for="telefone">Telefone (com DDD):</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(99) 99999-9999" required maxlength="15" />
+
+        <button type="submit">Enviar via WhatsApp</button>
+      </form>
+    </section>
+
+    <section id="galeria">
+      <h2>Galeria de Fotos</h2>
+      <p>Confira algumas das obras realizadas pela Texera Construções.</p>
+      <div class="galeria-grid">
+        <img src="img/funda.jpeg" alt="Obra 1 - Fundação" />
+        <img src="img/estru.jpeg" alt="Obra 2 - Estrutura" />
+        <img src="img/acaba.jpeg" alt="Obra 3 - Acabamento" />
+        <img src="img/reparo.jpeg" alt="Obra 4 - Reparos" />
+        <img src="img/limpeza.jpeg" alt="Obra 5 - Limpeza de Telhados" />
+      </div>
+    </section>
+
+    <section id="trabalhe">
+      <h2>Trabalhe Conosco</h2>
+      <p>Junte-se ao nosso time. Envie seu currículo para nosso setor de RH.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Texera Construções. Todos os direitos reservados.</p>
+  </footer>
+
+  <a href="#" id="btnWhatsapp" aria-label="Contato via WhatsApp" target="_blank" rel="noopener">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fff" width="32" height="32">
+      <path d="M20.52 3.48A11.941 11.941 0 0012 0C5.373 0 0 5.373 0 12a11.99 11.99 0 001.717 6.018L0 24l5.982-1.693A11.99 11.99 0 0012 24c6.627 0 12-5.373 12-12a11.941 11.941 0 00-3.48-8.52zm-8.297 17.593h-.002a8.63 8.63 0 01-4.478-1.376l-.32-.191-3.55.943.948-3.466-.209-.354a8.58 8.58 0 011.31-11.484 8.584 8.584 0 0111.335 1.446 8.613 8.613 0 01-6.534 14.482zm4.575-6.362c-.253-.127-1.495-.737-1.726-.821-.23-.086-.398-.127-.566.127-.167.253-.646.82-.792.988-.146.167-.292.191-.544.064-.253-.128-1.067-.394-2.034-1.254-.752-.67-1.26-1.5-1.408-1.753-.146-.253-.016-.39.11-.516.114-.113.253-.292.38-.44.127-.146.17-.253.253-.421.085-.167.042-.314-.021-.44-.063-.127-.566-1.363-.776-1.86-.204-.488-.412-.42-.566-.427l-.484-.008c-.167 0-.44.063-.67.314-.23.253-.876.856-.876 2.083 0 1.228.897 2.416 1.023 2.583.127.168 1.765 2.695 4.277 3.78.597.257 1.062.41 1.426.525.6.19 1.146.164 1.579.1.481-.07 1.495-.61 1.706-1.202.212-.59.212-1.096.148-1.203-.063-.107-.23-.167-.483-.294z"/>
+    </svg>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>
