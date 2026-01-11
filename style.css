@@ -1,262 +1,149 @@
-/* Reset básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* Reset e Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; line-height: 1.6; background: #f7f7f7; color: #4a0000; min-height: 100vh; }
 
-/* Corpo */
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background: #f7f7f7;
-  color: #4a0000;
-  min-height: 100vh;
+/* Container Principal da Home */
+.home-header {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-}
-
-/* Header */
-header {
-  background: #b71c1c;
-  color: white;
-  text-align: center;
-  padding: 2rem 1rem;
-}
-
-.logo h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-nav {
-  margin-top: 1rem;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1rem;
-  transition: color 0.3s ease;
-}
-
-.nav-links a:hover {
-  color: #ff6f61;
-  text-decoration: underline;
-}
-
-/* Main */
-main {
-  padding: 2rem;
-  flex-grow: 1;
-}
-
-section {
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(183, 28, 28, 0.2);
-}
-
-section h2 {
-  margin-bottom: 1rem;
-  color: #b71c1c;
-}
-
-/* Destaques serviços */
-.destaques-servicos {
-  margin-top: 1.5rem;
-}
-
-.destaques-servicos h3 {
-  color: #b71c1c;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-}
-
-.destaques-servicos ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding-left: 0;
-}
-
-.destaques-servicos ul li {
-  flex: 1 1 180px;
-  background: #fdecea;
-  border: 2px solid #b71c1c;
-  border-radius: 8px;
-  padding: 1rem;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #880e0e;
-  display: flex;
+  justify-content: space-between; /* Empurra o conteúdo para cima e os botões para baixo */
   align-items: center;
-  gap: 0.5rem;
-  transition: background 0.3s ease;
-  cursor: default;
-}
-
-.destaques-servicos ul li:hover {
-  background: #f9c4c2;
-}
-
-/* Botão Peça Orçamento */
-#btnAbrirFormulario {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  background: #b71c1c;
-  color: white;
-  border: none;
-  border-radius: 25px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  margin-top: 1rem;
-}
-
-#btnAbrirFormulario:hover {
-  background: #ff6f61;
-}
-
-/* Formulário Orçamento */
-form#formOrcamento {
-  margin-top: 2rem;
-  max-width: 400px;
-  background: #fff0f0;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(183, 28, 28, 0.3);
-}
-
-form#formOrcamento.hidden {
-  display: none;
-}
-
-form#formOrcamento label {
-  display: block;
-  margin-bottom: 0.25rem;
-  font-weight: 600;
-  color: #880e0e;
-}
-
-form#formOrcamento input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1.2rem;
-  border: 1px solid #b71c1c;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-form#formOrcamento button[type="submit"] {
-  background: #b71c1c;
-  color: white;
-  font-weight: bold;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  transition: background 0.3s ease;
-  width: 100%;
-}
-
-form#formOrcamento button[type="submit"]:hover {
-  background: #ff6f61;
-}
-
-/* Galeria */
-.galeria-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.galeria-grid img {
-  width: 100%;
-  border-radius: 8px;
-  object-fit: cover;
-  height: 140px;
-  box-shadow: 0 0 8px rgba(183, 28, 28, 0.3);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-
-.galeria-grid img:hover {
-  transform: scale(1.05);
-}
-
-/* Trabalhe Conosco */
-#trabalhe p {
-  font-size: 1.1rem;
-  color: #4a0000;
-}
-
-/* Footer */
-footer {
-  background: #b71c1c;
+  background: linear-gradient(rgba(183, 28, 28, 0.8), rgba(183, 28, 28, 0.8));
   color: white;
   text-align: center;
-  padding: 1rem;
+  padding: 40px 20px; /* Espaçamento interno */
 }
 
-/* Botão WhatsApp fixo */
-#btnWhatsapp {
+/* Centraliza o conteúdo da logo no meio da tela */
+.logo-content {
+  margin-top: auto; /* Ajuda a centralizar verticalmente no espaço restante */
+  margin-bottom: auto;
+}
+
+/* Navegação Horizontal na parte inferior */
+.nav-container-horizontal {
+  display: flex;
+  flex-direction: row; /* Alinha em linha */
+  justify-content: center;
+  gap: 15px; /* Espaço entre os botões */
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 20px; /* Margem do fundo da tela */
+  flex-wrap: wrap; /* Permite quebrar linha em celulares pequenos */
+}
+
+/* Ajuste nos botões para ficarem melhores em linha */
+.nav-container-horizontal .btn-nav {
+  flex: 1; /* Faz os botões terem o mesmo tamanho */
+  min-width: 150px; /* Garante que não fiquem pequenos demais */
+  text-decoration: none;
+  background: white;
+  color: #b71c1c;
+  padding: 15px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+/* Estilo da Imagem da Logo */
+.logo-img {
+  width: 350px; /* Ajuste o tamanho conforme necessário */
+  height: auto;
+  border-radius: 50%; /* Opcional: deixa a logo redonda */
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Ajuste do container para garantir a logo no centro e botões embaixo */
+.home-header {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center;
+  background: linear-gradient(rgba(183, 28, 28, 0.8), rgba(183, 28, 28, 0.8));
+  color: white;
+  text-align: center;
+  padding: 60px 20px 30px 20px;
+}
+
+.logo-content {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.nav-container-horizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 900px;
+  flex-wrap: wrap;
+}
+
+/* Responsividade para celulares */
+@media (max-width: 600px) {
+  .nav-container-horizontal {
+    flex-direction: column; /* No celular, volta a ser lista se a tela for muito estreita */
+    width: 90%;
+  }
+}
+/* Estilos do Widget de Chat */
+#chat-button {
   position: fixed;
   bottom: 25px;
   right: 25px;
-  background: #25d366;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #0042DA;
+  color: white;
+  border: none;
   cursor: pointer;
-  z-index: 1000;
-  transition: background 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  font-size: 24px;
+  z-index: 9999;
 }
 
-#btnWhatsapp:hover {
-  background: #128c4a;
+#chat-window {
+  position: fixed;
+  bottom: 95px;
+  right: 25px;
+  width: 320px;
+  height: 450px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
-  .nav-links {
-    flex-direction: column;
-    gap: 1rem;
-  }
+.hidden { display: none !important; }
 
-  .destaques-servicos ul {
-    flex-direction: column;
-  }
+#chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f9f9f9; }
+.bot-msg { background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 80%; font-size: 14px; }
+.user-msg { background: #b71c1c; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 80%; font-size: 14px; }
 
-  .destaques-servicos ul li {
-    flex: 1 1 100%;
-  }
-
-  main {
-    padding: 1rem;
-  }
-
-  form#formOrcamento {
-    max-width: 100%;
-    padding: 1rem;
-  }
+/* Galeria e Carrossel */
+.carousel-container {
+  display: flex;
+  overflow-x: auto;
+  gap: 20px;
+  padding: 20px;
+  scroll-snap-type: x mandatory;
 }
+.product-card {
+  flex: 0 0 280px;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  scroll-snap-align: start;
+}
+.product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }

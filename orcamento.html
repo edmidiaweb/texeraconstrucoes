@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peça um Orçamento | Texera Construções</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div style="padding: 20px; text-align: center;">
+    <a href="index.html" style="color: #b71c1c; text-decoration: none; font-weight: bold;">⬅ Voltar para Home</a>
+    
+    <main style="margin-top: 30px;">
+        <section id="orcamento" style="max-width: 500px; margin: 0 auto; text-align: left;">
+            <h2 style="text-align: center; color: #b71c1c; margin-bottom: 20px;">Solicitar Orçamento</h2>
+            <p style="margin-bottom: 20px; text-align: center;">Preencha os dados abaixo e entraremos em contato via WhatsApp com os valores.</p>
+
+            <form id="formOrcamento" onsubmit="enviarOrcamento(event)">
+                <div style="margin-bottom: 15px;">
+                    <label for="nome" style="display: block; font-weight: bold; margin-bottom: 5px;">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome" required 
+                           style="width: 100%; padding: 10px; border: 1px solid #b71c1c; border-radius: 5px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="telefone" style="display: block; font-weight: bold; margin-bottom: 5px;">WhatsApp (com DDD):</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(13) 99999-9999" required maxlength="15"
+                           style="width: 100%; padding: 10px; border: 1px solid #b71c1c; border-radius: 5px;">
+                </div>
+
+                <div style="margin-bottom: 15px;">
+                    <label for="servico" style="display: block; font-weight: bold; margin-bottom: 5px;">Tipo de Serviço:</label>
+                    <select id="servico" name="servico" required 
+                            style="width: 100%; padding: 10px; border: 1px solid #b71c1c; border-radius: 5px; background: white;">
+                        <option value="">Selecione um serviço...</option>
+                        <option value="Fundação e Estrutura">Fundação e Estrutura</option>
+                        <option value="Alvenaria">Alvenaria</option>
+                        <option value="Acabamento e Pintura">Acabamento e Pintura</option>
+                        <option value="Serviços de Eletrica">Serviços de Elétrica</option>
+                        <option value="Limpeza de Telhados">Limpeza de Telhados</option>
+                        <option value="Outros">Outros (Descrever no chat)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-nav btn-highlight" style="width: 100%; border: none; cursor: pointer; font-size: 16px;">
+                    Enviar Pedido para o WhatsApp
+                </button>
+            </form>
+        </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
