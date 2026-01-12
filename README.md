@@ -1,6 +1,6 @@
 # 🏗️ Texera Construções - Site Institucional
 
-Este é um projeto de site institucional moderno e responsivo desenvolvido para a **Texera Construções**, empresa com mais de 30 anos de experiência no setor de construção civil em Itanhaém e região.
+Este é um projeto de site institucional moderno e responsivo desenvolvido para a **Texera Construções**, empresa com mais de 30 anos de experiência no setor de construção civil em Guarujá e região.
 
 O projeto conta com navegação multi-página, carrossel de serviços, formulário inteligente integrado ao WhatsApp e um chatbot personalizado para atendimento automático.
 
