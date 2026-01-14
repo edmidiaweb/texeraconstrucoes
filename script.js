@@ -1,136 +1,153 @@
-// Configuração Global
-const numeroWhatsApp = '5513988742647';
+// --- CONFIG E ESTADO ---
+let CONFIG = JSON.parse(localStorage.getItem('texera_config')) || {
+    whatsapp: "5513988742647",
+    senhaAdmin: "1234"
+};
+let STATS = JSON.parse(localStorage.getItem('texera_stats')) || { visitas: 0, orçamentos: 0 };
+let chatStep = 0; 
+let userData = { nome: "", necessidade: "", prazo: "" };
 
-/**
- * INICIALIZAÇÃO DO SITE
- * Executa quando o HTML termina de carregar
- */
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Injetar o Widget do Chatbot em todas as páginas automaticamente
-    const body = document.body;
-    const chatHTML = `
-        <div id="chat-widget-container">
-            <button id="chat-button" onclick="toggleChat()" aria-label="Abrir Chat">💬</button>
-            <div id="chat-window" class="hidden">
-                <div class="chat-header" style="background:#b71c1c;color:white;padding:15px;font-weight:bold;display:flex;justify-content:space-between;border-radius:15px 15px 0 0;">
-                    <span>Atendimento Texera</span>
-                    <button onclick="toggleChat()" style="background:none;border:none;color:white;cursor:pointer;font-size:18px;">✖</button>
-                </div>
-                <div id="chat-messages" style="flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;background:#f9f9f9;height:300px;"></div>
-                <div class="chat-input-area" style="display:flex;padding:10px;border-top:1px solid #eee;background:white;">
-                    <input type="text" id="bot-input" style="flex:1;border:none;outline:none;padding:5px;" placeholder="Digite sua dúvida...">
-                    <button onclick="handleBotLogic()" style="background:none;border:none;color:#b71c1c;font-size:20px;cursor:pointer;">➤</button>
-                </div>
-            </div>
-        </div>`;
-    body.insertAdjacentHTML('beforeend', chatHTML);
+// --- NAVEGAÇÃO SPA ---
+function mostrarPagina(id) {
+    document.querySelectorAll('.overlay-page').forEach(p => p.style.display = 'none');
+    const pg = document.getElementById(id);
+    if(pg) pg.style.display = 'flex';
+}
 
-    // 2. Máscara de Telefone em tempo real (apenas se o campo existir na página)
-    const telInput = document.getElementById('telefone');
-    if (telInput) {
-        telInput.addEventListener('input', (e) => {
-            let value = e.target.value.replace(/\D/g, ''); // Remove tudo que não é número
-            if (value.length > 11) value = value.slice(0, 11);
+function voltarHome() {
+    document.querySelectorAll('.overlay-page').forEach(p => p.style.display = 'none');
+    fecharZoom();
+}
 
-            // Aplica a formatação (13) 99999-9999
-            if (value.length > 6) {
-                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-            } else if (value.length > 2) {
-                value = value.replace(/(\d{2})(\d{0,5})/, '($1) $2');
-            } else if (value.length > 0) {
-                value = value.replace(/(\d{0,2})/, '($1');
-            }
-            e.target.value = value;
-        });
-    }
+function fecharAoClicarFora(e) {
+    if (e.target.classList.contains('overlay-page')) voltarHome();
+}
 
-    // 3. Listener para o formulário de orçamento (apenas se existir na página)
-    const formOrcamento = document.getElementById('formOrcamento');
-    if (formOrcamento) {
-        formOrcamento.addEventListener('submit', enviarOrcamento);
-    }
-});
+// --- GALERIA E ZOOM ---
+function expandirImagem(card) {
+    const img = card.querySelector('img');
+    const modal = document.getElementById('image-light-box');
+    document.getElementById('img-zoom-target').src = img.src;
+    document.getElementById('text-zoom-target').innerText = img.getAttribute('data-desc');
+    modal.style.display = 'flex';
+}
 
-/**
- * LÓGICA DO CHATBOT
- */
-function toggleChat() {
-    const win = document.getElementById('chat-window');
-    win.classList.toggle('hidden');
-    
-    const msgBox = document.getElementById('chat-messages');
-    if (msgBox.innerHTML === "") {
-        addMsg("bot", "Olá! Sou o assistente virtual da Texera Construções. 🏗️");
-        setTimeout(() => {
-            addMsg("bot", "Como posso te ajudar? Você pode perguntar sobre 'orçamento', 'serviços' ou 'contato'.");
-        }, 600);
+function fecharZoom() {
+    const modal = document.getElementById('image-light-box');
+    if(modal) modal.style.display = 'none';
+}
+
+// --- CHATBOT FAQ INTELIGENTE ---
+function toggleChat(e) {
+    if(e) e.stopPropagation();
+    const modal = document.getElementById('modal-chat');
+    if(modal.style.display === 'block') {
+        modal.style.display = 'none';
+    } else {
+        modal.style.display = 'block';
+        if(document.getElementById('chat-box').innerHTML.trim() === "") iniciarChat();
     }
 }
 
-function addMsg(sender, text) {
-    const msgBox = document.getElementById('chat-messages');
-    const div = document.createElement('div');
-    // As classes bot-msg e user-msg devem estar no seu style.css
-    div.className = sender === "bot" ? "bot-msg" : "user-msg";
-    div.innerText = text;
-    msgBox.appendChild(div);
-    msgBox.scrollTop = msgBox.scrollHeight; // Rola para o fim da conversa
+function iniciarChat() {
+    chatStep = 0;
+    addMessage("bot", "Olá! Sou o assistente da **Texera**. Como posso ajudar hoje?");
+    setTimeout(() => {
+        const faq = `
+            <button class="btn-faq" onclick="handleFAQ('atendimento')">Onde atendem?</button>
+            <button class="btn-faq" onclick="handleFAQ('pagamento')">Formas de pagamento?</button>
+            <button class="btn-faq" style="background:var(--primary); color:white;" onclick="iniciarOrcamento()">Quero um Orçamento!</button>
+        `;
+        addMessage("bot", faq);
+    }, 600);
+}
+
+function handleFAQ(tipo) {
+    if(tipo === 'atendimento') {
+        addMessage("user", "Onde vocês atendem?");
+        setTimeout(() => addMessage("bot", "Atendemos em todo o **Litoral Sul e Baixada Santista** (Itanhaém, Santos, Guarujá, etc). 📍"), 500);
+    } else {
+        addMessage("user", "Quais as formas de pagamento?");
+        setTimeout(() => addMessage("bot", "Pix, Transferência e Cartão de Crédito. Facilitamos sua obra! 💳"), 500);
+    }
+}
+
+function iniciarOrcamento() {
+    addMessage("user", "Quero um orçamento!");
+    chatStep = 1;
+    setTimeout(() => addMessage("bot", "Excelente! Qual é o seu **nome**?"), 600);
 }
 
 function handleBotLogic() {
     const input = document.getElementById('bot-input');
-    const text = input.value.toLowerCase().trim();
-    if (!text) return;
-
-    addMsg("user", input.value);
+    const text = input.value.trim();
+    if(!text) return;
+    addMessage("user", text);
     input.value = "";
 
-    // Simula tempo de resposta do robô
     setTimeout(() => {
-        if (text.includes("orçamento") || text.includes("preço") || text.includes("valor")) {
-            addMsg("bot", "Trabalhamos com projetos sob medida. Para um valor exato, preencha nossa página de 'Orçamento' ou envie fotos da obra aqui no Zap!");
-        } 
-        else if (text.includes("serviço") || text.includes("fazem") || text.includes("limpeza")) {
-            addMsg("bot", "Realizamos desde a fundação ao acabamento, além de reparos em chuveiros, infiltrações e limpeza de telhados.");
-        }
-        else if (text.includes("contato") || text.includes("whatsapp") || text.includes("falar com alguém")) {
-            addMsg("bot", "Você pode falar agora com nosso mestre de obras pelo WhatsApp:");
-            addMsg("bot", "Link: https://wa.me/" + numeroWhatsApp);
-        }
-        else if (text.includes("onde") || text.includes("endereço") || text.includes("cidade")) {
-            addMsg("bot", "Nossa base é em Itanhaém, mas atendemos toda a região! 📍");
-        }
-        else {
-            addMsg("bot", "Não entendi muito bem... 🤔 Tente digitar 'serviços' ou peça para falar com um 'humano'.");
+        if(chatStep === 1) { userData.nome = text; chatStep = 2; addMessage("bot", `Prazer, **${text}**! O que você precisa fazer na obra?`); }
+        else if(chatStep === 2) { userData.necessidade = text; chatStep = 3; addMessage("bot", "E para **quando** você precisa desse serviço?"); }
+        else if(chatStep === 3) {
+            userData.prazo = text; chatStep = 4;
+            addMessage("bot", "Anotado! Agora clique abaixo para concluir no WhatsApp:");
+            const link = `https://wa.me/${CONFIG.whatsapp}?text=*CONTATO SITE*%0A*Nome:* ${userData.nome}%0A*Serviço:* ${userData.necessidade}%0A*Prazo:* ${userData.prazo}`;
+            addMessage("bot", `<a href="${link}" target="_blank" class="btn-concluir-chat">CONCLUIR ATENDIMENTO <i class="fab fa-whatsapp"></i></a>`);
         }
     }, 800);
 }
 
-/**
- * ENVIO DE FORMULÁRIO PARA WHATSAPP
- */
-function enviarOrcamento(event) {
-    event.preventDefault();
-
-    const nome = document.getElementById('nome').value;
-    const telefone = document.getElementById('telefone').value;
-    const servico = document.getElementById('servico').value;
-    const endereco = document.getElementById('endereco') ? document.getElementById('endereco').value : "Não informado";
-
-    // Validação básica
-    if (!nome || !telefone || !servico) {
-        alert("Por favor, preencha os campos obrigatórios.");
-        return;
-    }
-
-    // Monta a mensagem para o WhatsApp
-    const mensagem = `*Solicitação de Orçamento - Site*%0A%0A` +
-                     `*Nome:* ${nome}%0A` +
-                     `*Telefone:* ${telefone}%0A` +
-                     `*Serviço:* ${servico}%0A` +
-                     `*Endereço:* ${endereco}`;
-
-    // Abre o link do WhatsApp
-    const url = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
-    window.open(url, '_blank');
+function fecharChatExterno(e) { if(e.target.id === 'modal-chat') toggleChat(); }
+function addMessage(sender, text) {
+    const box = document.getElementById('chat-box');
+    const msg = document.createElement('div');
+    msg.className = `msg ${sender}`;
+    msg.innerHTML = text;
+    box.appendChild(msg);
+    box.scrollTop = box.scrollHeight;
 }
+
+// --- ORÇAMENTO E ADMIN ---
+document.addEventListener('input', (e) => {
+    if(e.target.id === 'telefone') {
+        let v = e.target.value.replace(/\D/g,'');
+        v = v.replace(/^(\d{2})(\d)/g,"($1) $2").replace(/(\d{5})(\d)/,"$1-$2");
+        e.target.value = v.substring(0,15);
+    }
+});
+
+const formOrcamento = document.getElementById('formOrcamento');
+if(formOrcamento) {
+    formOrcamento.onsubmit = function(e) {
+        e.preventDefault();
+        STATS.orçamentos++;
+        localStorage.setItem('texera_stats', JSON.stringify(STATS));
+        const msg = `*ORÇAMENTO GRÁTIS*%0A*Nome:* ${document.getElementById('nome').value}%0A*Serviço:* ${document.getElementById('servico').value}`;
+        window.open(`https://wa.me/${CONFIG.whatsapp}?text=${msg}`);
+    };
+}
+
+let clicks = 0;
+document.getElementById('secret-trigger').onclick = (e) => {
+    e.stopPropagation();
+    clicks++;
+    if(clicks >= 5) {
+        clicks = 0;
+        if(prompt("Senha:") === CONFIG.senhaAdmin) {
+            document.getElementById('stats-area').innerHTML = `Visitas: ${STATS.visitas} | Pedidos: ${STATS.orçamentos}`;
+            mostrarPagina('admin-page');
+        }
+    }
+};
+
+function salvarConfig() {
+    const wa = document.getElementById('admin-whatsapp').value.replace(/\D/g,'');
+    if(wa) CONFIG.whatsapp = wa;
+    const ns = document.getElementById('admin-password-input').value;
+    if(ns) CONFIG.senhaAdmin = ns;
+    localStorage.setItem('texera_config', JSON.stringify(CONFIG));
+    alert("Dados salvos!");
+    voltarHome();
+}
+
+window.onload = () => { STATS.visitas++; localStorage.setItem('texera_stats', JSON.stringify(STATS)); };

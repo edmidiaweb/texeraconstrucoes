@@ -1,30 +1,125 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Texera Construções | Home</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texera Construções | Excelência em Obras</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body onclick="fecharAoClicarFora(event)">
 
-  <header class="home-header">
-    <div class="logo-content">
-      <img src="img/tex.jpg" alt="Logo Texera Construções" class="logo-img">
-      <h1></h1>
-      <p>📍 Guarujá e Região</p>
-      <p>🕒 Seg a Sex: 08h às 17h</p>
+    <header id="home-page" class="view-section">
+        <div class="logo-content" onclick="event.stopPropagation()">
+            <img src="img/tex.jpg" alt="Texera Construções" class="logo-img" id="secret-trigger">
+            <h1 style="color: white; margin-top: 15px; font-size: 2.5rem;">TEXERA</h1>
+            <p style="font-size: 1.2rem; margin-bottom: 20px;">Construindo sonhos com perfeição e segurança.</p>
+        </div>
+        
+        <nav class="nav-container-horizontal" onclick="event.stopPropagation()">
+            <button onclick="mostrarPagina('sobre-page')" class="btn-nav">QUEM SOMOS</button>
+            <button onclick="mostrarPagina('galeria-page')" class="btn-nav"><i class="fas fa-hammer"></i> VER NOSSAS OBRAS</button>
+            <button onclick="mostrarPagina('orcamento-page')" class="btn-nav btn-highlight">ORÇAMENTO GRÁTIS <i class="fas fa-arrow-right"></i></button>
+        </nav>
+    </header>
+
+    <section id="sobre-page" class="view-section overlay-page">
+        <div class="content-card" onclick="event.stopPropagation()">
+            <h2 style="color: var(--primary); margin-bottom: 15px;">Nossa História</h2>
+            <div class="text-container" style="text-align: left; font-size: 0.95rem; line-height: 1.6;">
+                <p>Com mais de <strong>30 anos de atuação</strong>, a <strong>Texera Construções</strong> é referência em qualidade no <strong>Litoral Paulista</strong>.</p>
+                <p>Unimos honestidade absoluta, pontualidade britânica e excelência técnica em cada tijolo assentado.</p>
+            </div>
+            <button class="btn-voltar-simples" onclick="voltarHome()">VOLTAR</button>
+        </div>
+    </section>
+
+    <section id="galeria-page" class="view-section overlay-page">
+        <div class="content-card wide" onclick="event.stopPropagation()" style="max-width: 600px;">
+            <h2 style="color: var(--primary);">Nossas Obras</h2>
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">Clique para ver detalhes do serviço</p>
+            <div class="carousel-container">
+                <div class="product-card" onclick="expandirImagem(this)">
+                    <img src="img/funda.jpeg" data-desc="Fundação de alta resistência com concreto usinado.">
+                    <h3>Fundação</h3>
+                </div>
+                <div class="product-card" onclick="expandirImagem(this)">
+                    <img src="img/acaba.jpeg" data-desc="Acabamento fino, porcelanato e pintura premium.">
+                    <h3>Acabamento</h3>
+                </div>
+                <div class="product-card" onclick="expandirImagem(this)">
+                    <img src="img/reparo.jpeg" data-desc="Manutenção elétrica, hidráulica e telhados.">
+                    <h3>Reparos</h3>
+                </div>
+            </div>
+            <button class="btn-voltar-simples" onclick="voltarHome()">VOLTAR</button>
+        </div>
+    </section>
+
+    <div id="image-light-box" class="modal-zoom" onclick="fecharZoom()">
+        <div class="zoom-container" onclick="event.stopPropagation()">
+            <img id="img-zoom-target" src="">
+            <div id="text-zoom-target"></div>
+            <button class="btn-close-zoom" onclick="fecharZoom()">FECHAR</button>
+        </div>
     </div>
-    
-    <nav class="nav-container-horizontal">
-      <a href="sobre.html" class="btn-nav">Quem Somos</a>
-      <a href="galeria.html" class="btn-nav">Nossos Serviços</a>
-      <a href="orcamento.html" class="btn-nav btn-highlight">Peça um Orçamento</a>
-    </nav>
-  </header>
 
-  <div id="chat-widget-container"></div>
+    <section id="orcamento-page" class="view-section overlay-page">
+        <div class="content-card budget-card" onclick="event.stopPropagation()">
+            <header class="budget-header">
+                <i class="fas fa-calculator" style="font-size: 2rem; color: var(--primary);"></i>
+                <h2>Orçamento Grátis</h2>
+                <p>Receba sua estimativa pelo WhatsApp</p>
+            </header>
+            <form id="formOrcamento" class="modern-form">
+                <div class="input-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="nome" placeholder="Seu nome" required>
+                </div>
+                <div class="input-group">
+                    <label>Seu WhatsApp</label>
+                    <input type="tel" id="telefone" placeholder="(13) 99999-9999" required>
+                </div>
+                <div class="input-group">
+                    <label>Tipo de Serviço</label>
+                    <select id="servico" required>
+                        <option value="" disabled selected>Selecione...</option>
+                        <option value="Fundação">Fundação</option>
+                        <option value="Reforma">Reforma Geral</option>
+                        <option value="Pintura">Pintura/Acabamento</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-send-budget">SOLICITAR AGORA <i class="fab fa-whatsapp"></i></button>
+            </form>
+            <button class="btn-voltar-simples" onclick="voltarHome()">CANCELAR</button>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <section id="admin-page" class="view-section overlay-page">
+        <div class="content-card" onclick="event.stopPropagation()">
+            <h3>Painel Admin</h3>
+            <div id="stats-area" style="margin: 15px 0; font-size: 0.9rem;"></div>
+            <div class="modern-form">
+                <input type="text" id="admin-whatsapp" placeholder="WhatsApp (Ex: 5513...)">
+                <input type="password" id="admin-password-input" placeholder="Nova Senha">
+                <button class="btn-highlight" onclick="salvarConfig()" style="padding: 10px; border: none; border-radius: 8px; cursor: pointer;">SALVAR</button>
+            </div>
+            <button class="btn-voltar-simples" onclick="voltarHome()">SAIR</button>
+        </div>
+    </section>
+
+    <button id="chat-button" onclick="toggleChat(event)">💬</button>
+    <div id="modal-chat" class="modal-chatbot-overlay" onclick="fecharChatExterno(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="chat-header">Engenheiro Virtual Texera</div>
+            <div id="chat-box"></div>
+            <div class="chat-input-area">
+                <input type="text" id="bot-input" placeholder="Digite aqui..." onkeypress="if(event.key==='Enter') handleBotLogic()">
+                <button onclick="handleBotLogic()">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

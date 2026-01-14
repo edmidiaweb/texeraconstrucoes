@@ -1,149 +1,75 @@
-/* Reset e Base */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; line-height: 1.6; background: #f7f7f7; color: #4a0000; min-height: 100vh; }
-
-/* Container Principal da Home */
-.home-header {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* Empurra o conteúdo para cima e os botões para baixo */
-  align-items: center;
-  background: linear-gradient(rgba(183, 28, 28, 0.8), rgba(183, 28, 28, 0.8));
-  color: white;
-  text-align: center;
-  padding: 40px 20px; /* Espaçamento interno */
+:root {
+    --primary: #b71c1c;
+    --primary-dark: #7f0000;
+    --whatsapp: #25d366;
+    --bg-overlay: rgba(0, 0, 0, 0.95);
+    --transition: all 0.3s ease;
 }
 
-/* Centraliza o conteúdo da logo no meio da tela */
-.logo-content {
-  margin-top: auto; /* Ajuda a centralizar verticalmente no espaço restante */
-  margin-bottom: auto;
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+
+body { background: #000; overflow: hidden; height: 100vh; width: 100vw; }
+
+.view-section {
+    height: 100vh; width: 100vw; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; position: fixed;
+    top: 0; left: 0; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('img/funda.jpeg') center/cover;
+    color: white; text-align: center; z-index: 10;
 }
 
-/* Navegação Horizontal na parte inferior */
-.nav-container-horizontal {
-  display: flex;
-  flex-direction: row; /* Alinha em linha */
-  justify-content: center;
-  gap: 15px; /* Espaço entre os botões */
-  width: 100%;
-  max-width: 900px;
-  margin-bottom: 20px; /* Margem do fundo da tela */
-  flex-wrap: wrap; /* Permite quebrar linha em celulares pequenos */
+.overlay-page { background: var(--bg-overlay) !important; z-index: 100; backdrop-filter: blur(10px); display: none; }
+
+.content-card {
+    background: white; color: #333; padding: 30px; border-radius: 20px;
+    width: 90%; max-width: 450px; box-shadow: 0 15px 50px rgba(0,0,0,0.5);
 }
 
-/* Ajuste nos botões para ficarem melhores em linha */
-.nav-container-horizontal .btn-nav {
-  flex: 1; /* Faz os botões terem o mesmo tamanho */
-  min-width: 150px; /* Garante que não fiquem pequenos demais */
-  text-decoration: none;
-  background: white;
-  color: #b71c1c;
-  padding: 15px 10px;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+.logo-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid white; cursor: pointer; }
+
+.nav-container-horizontal { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
+
+.btn-nav {
+    padding: 12px 24px; border-radius: 10px; border: none; font-weight: bold;
+    cursor: pointer; background: white; color: var(--primary); transition: var(--transition);
 }
 
-/* Estilo da Imagem da Logo */
-.logo-img {
-  width: 350px; /* Ajuste o tamanho conforme necessário */
-  height: auto;
-  border-radius: 50%; /* Opcional: deixa a logo redonda */
-  margin-bottom: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
+.btn-highlight { background: var(--primary); color: white; }
+.btn-nav:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-/* Ajuste do container para garantir a logo no centro e botões embaixo */
-.home-header {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; 
-  align-items: center;
-  background: linear-gradient(rgba(183, 28, 28, 0.8), rgba(183, 28, 28, 0.8));
-  color: white;
-  text-align: center;
-  padding: 60px 20px 30px 20px;
-}
+/* GALERIA */
+.carousel-container { display: flex; overflow-x: auto; gap: 15px; padding: 15px 0; scrollbar-width: none; }
+.product-card { flex: 0 0 150px; cursor: pointer; }
+.product-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 10px; border: 2px solid #ddd; }
 
-.logo-content {
-  margin-top: auto;
-  margin-bottom: auto;
+/* ZOOM IMAGEM */
+.modal-zoom {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.98); z-index: 2000; display: none;
+    justify-content: center; align-items: center; padding: 20px;
 }
+.zoom-container { max-width: 500px; width: 100%; text-align: center; }
+#img-zoom-target { width: 100%; border-radius: 15px; box-shadow: 0 0 30px var(--primary); }
+#text-zoom-target { background: white; padding: 20px; border-radius: 10px; margin-top: 15px; color: #333; }
+.btn-close-zoom { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; margin-top: 10px; cursor: pointer; }
 
-.nav-container-horizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 15px;
-  width: 100%;
-  max-width: 900px;
-  flex-wrap: wrap;
-}
+/* ORÇAMENTO */
+.modern-form { display: flex; flex-direction: column; gap: 15px; text-align: left; }
+.input-group label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; color: #666; }
+.input-group input, .input-group select { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; }
+.btn-send-budget { background: var(--whatsapp); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: bold; cursor: pointer; display: flex; justify-content: center; gap: 10px; }
 
-/* Responsividade para celulares */
-@media (max-width: 600px) {
-  .nav-container-horizontal {
-    flex-direction: column; /* No celular, volta a ser lista se a tela for muito estreita */
-    width: 90%;
-  }
-}
-/* Estilos do Widget de Chat */
-#chat-button {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: #0042DA;
-  color: white;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  font-size: 24px;
-  z-index: 9999;
-}
-
-#chat-window {
-  position: fixed;
-  bottom: 95px;
-  right: 25px;
-  width: 320px;
-  height: 450px;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 9999;
-}
-
-.hidden { display: none !important; }
-
-#chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f9f9f9; }
-.bot-msg { background: #eee; padding: 10px; border-radius: 10px; align-self: flex-start; max-width: 80%; font-size: 14px; }
-.user-msg { background: #b71c1c; color: white; padding: 10px; border-radius: 10px; align-self: flex-end; max-width: 80%; font-size: 14px; }
-
-/* Galeria e Carrossel */
-.carousel-container {
-  display: flex;
-  overflow-x: auto;
-  gap: 20px;
-  padding: 20px;
-  scroll-snap-type: x mandatory;
-}
-.product-card {
-  flex: 0 0 280px;
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  scroll-snap-align: start;
-}
-.product-card img { width: 100%; height: 200px; object-fit: cover; border-radius: 5px; }
+/* CHATBOT */
+#chat-button { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; background: var(--primary); color: white; border: none; border-radius: 50%; font-size: 24px; cursor: pointer; z-index: 999; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+.modal-chatbot-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 10000; }
+.modal-content { background: white; width: 320px; position: fixed; bottom: 95px; right: 25px; border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 10px 40px rgba(0,0,0,0.4); }
+.chat-header { background: var(--primary); color: white; padding: 15px; font-weight: bold; }
+#chat-box { height: 320px; overflow-y: auto; padding: 15px; background: #f9f9f9; display: flex; flex-direction: column; gap: 10px; }
+.msg { padding: 10px; border-radius: 12px; font-size: 0.85rem; line-height: 1.4; max-width: 85%; }
+.bot { background: #eee; align-self: flex-start; }
+.user { background: var(--primary); color: white; align-self: flex-end; }
+.chat-input-area { display: flex; padding: 10px; border-top: 1px solid #eee; }
+.chat-input-area input { flex: 1; border: none; outline: none; padding: 8px; }
+.btn-faq { width: 100%; background: white; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; margin-bottom: 5px; cursor: pointer; font-size: 0.8rem; }
+.btn-concluir-chat { display: inline-block; background: var(--whatsapp); color: white !important; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; margin-top: 10px; animation: pulse 2s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+.btn-voltar-simples { background: none; border: none; color: #888; margin-top: 15px; cursor: pointer; text-decoration: underline; width: 100%; }
