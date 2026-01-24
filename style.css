@@ -24,6 +24,12 @@ body { background: #000; overflow: hidden; height: 100vh; width: 100vw; }
     width: 90%; max-width: 450px; box-shadow: 0 15px 50px rgba(0,0,0,0.5);
 }
 
+/* HISTÓRIA - TEXTO JUSTIFICADO */
+#sobre-page .text-container {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
 .logo-img { width: 150px; height: 150px; border-radius: 50%; border: 5px solid white; cursor: pointer; }
 
 .nav-container-horizontal { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; justify-content: center; }
@@ -36,10 +42,39 @@ body { background: #000; overflow: hidden; height: 100vh; width: 100vw; }
 .btn-highlight { background: var(--primary); color: white; }
 .btn-nav:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-/* GALERIA */
-.carousel-container { display: flex; overflow-x: auto; gap: 15px; padding: 15px 0; scrollbar-width: none; }
-.product-card { flex: 0 0 150px; cursor: pointer; }
-.product-card img { width: 100%; height: 100px; object-fit: cover; border-radius: 10px; border: 2px solid #ddd; }
+/* GALERIA - ESPAÇAMENTO IGUAL */
+.carousel-container { 
+    display: flex; 
+    justify-content: center; 
+    gap: 20px; 
+    padding: 15px 0; 
+    flex-wrap: wrap; /* Garante que no celular as fotos se ajustem */
+}
+
+.product-card { 
+    flex: 0 1 150px; 
+    cursor: pointer; 
+    text-align: center;
+}
+
+.product-card h3 {
+    font-size: 0.9rem;
+    margin-top: 8px;
+}
+
+.product-card img { 
+    width: 100%; 
+    height: 110px; 
+    object-fit: cover; 
+    border-radius: 10px; 
+    border: 2px solid #eee; 
+    transition: var(--transition);
+}
+
+.product-card:hover img {
+    border-color: var(--primary);
+    transform: scale(1.03);
+}
 
 /* ZOOM IMAGEM */
 .modal-zoom {
@@ -69,7 +104,8 @@ body { background: #000; overflow: hidden; height: 100vh; width: 100vw; }
 .user { background: var(--primary); color: white; align-self: flex-end; }
 .chat-input-area { display: flex; padding: 10px; border-top: 1px solid #eee; }
 .chat-input-area input { flex: 1; border: none; outline: none; padding: 8px; }
-.btn-faq { width: 100%; background: white; border: 1px solid var(--primary); padding: 8px; border-radius: 5px; margin-bottom: 5px; cursor: pointer; font-size: 0.8rem; }
+.btn-voltar-simples { background: none; border: none; color: #888; margin-top: 15px; cursor: pointer; text-decoration: underline; width: 100%; }
+
+/* Animação do botão concluir no chat */
 .btn-concluir-chat { display: inline-block; background: var(--whatsapp); color: white !important; padding: 12px; border-radius: 8px; text-decoration: none; font-weight: bold; text-align: center; margin-top: 10px; animation: pulse 2s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
-.btn-voltar-simples { background: none; border: none; color: #888; margin-top: 15px; cursor: pointer; text-decoration: underline; width: 100%; }
