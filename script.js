@@ -65,7 +65,7 @@ function iniciarChat() {
 function handleFAQ(tipo) {
     if(tipo === 'atendimento') {
         addMessage("user", "Onde vocês atendem?");
-        setTimeout(() => addMessage("bot", "Atendemos em todo o **Litoral Sul e Baixada Santista** (Itanhaém, Santos, Guarujá, etc). 📍"), 500);
+        setTimeout(() => addMessage("bot", "Atendemos em Guarujá, Santos e região. 📍"), 500);
     } else {
         addMessage("user", "Quais as formas de pagamento?");
         setTimeout(() => addMessage("bot", "Pix, Transferência e Cartão de Crédito. Facilitamos sua obra! 💳"), 500);
