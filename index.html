@@ -30,7 +30,6 @@
                 <p>Com mais de <strong>30 anos de atuação</strong>, a <strong>Texera Construções</strong> é referência em qualidade no <strong>Litoral Paulista</strong>.</p>
                 <p>"Há mais de 30 anos, transformamos projetos em realidades duradouras por todo o Litoral Paulista. Na Texera Construções, unimos a sofisticação técnica ao compromisso com a transparência. Acreditamos que uma obra perfeita nasce da união entre engenharia de ponta e o carinho dedicado a cada tijolo assentado, garantindo segurança e satisfação para a sua família."</p>
             </div>
-            
         </div>
     </section>
 
@@ -52,7 +51,6 @@
                     <h3>Reparos</h3>
                 </div>
             </div>
-            
         </div>
     </section>
 
@@ -60,7 +58,6 @@
         <div class="zoom-container" onclick="event.stopPropagation()">
             <img id="img-zoom-target" src="">
             <div id="text-zoom-target"></div>
-            
         </div>
     </div>
 
@@ -87,9 +84,9 @@
                         <option value="Fundação">Fundação</option>
                         <option value="Reforma">Reforma Geral</option>
                         <option value="Pintura">Pintura/Acabamento</option>
-                        <option value="Pintura">Elétrica</option>
-                        <option value="Pintura">Infiltrações</option>
-                        <option value="Pintura">Telhado</option>
+                        <option value="Elétrica">Elétrica</option>
+                        <option value="Infiltrações">Infiltrações</option>
+                        <option value="Telhado">Telhado</option>
                     </select>
                 </div>
                 <button type="submit" class="btn-send-budget">SOLICITAR AGORA <i class="fab fa-whatsapp"></i></button>
@@ -105,22 +102,27 @@
             <div class="modern-form">
                 <input type="text" id="admin-whatsapp" placeholder="WhatsApp (Ex: 5513...)">
                 <input type="password" id="admin-password-input" placeholder="Nova Senha">
-                <button class="btn-highlight" onclick="salvarConfig()" style="padding: 10px; border: none; border-radius: 8px; cursor: pointer;">SALVAR</button>
+                <button class="btn-highlight" onclick="salvarConfig()" style="padding: 10px; border: none; border-radius: 8px; cursor: pointer;">SALVAL</button>
             </div>
             <button class="btn-voltar-simples" onclick="voltarHome()">SAIR</button>
         </div>
     </section>
 
-    <button id="chat-button" onclick="toggleChat(event)">💬</button>
-    <div id="modal-chat" class="modal-chatbot-overlay" onclick="fecharChatExterno(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <div class="chat-header">Engenheiro Virtual Texera</div>
-            <div id="chat-box"></div>
-            <div class="chat-input-area">
-                <input type="text" id="bot-input" placeholder="Digite aqui..." onkeypress="if(event.key==='Enter') handleBotLogic()">
-                <button onclick="handleBotLogic()">➤</button>
+    <!-- INTERFACE DO CHATBOT INTEGRADA -->
+    <div id="chatbot-container" onclick="event.stopPropagation()">
+        <div id="chatbot-window">
+            <div id="chatbot-header">
+                <div><strong>Texera Construções</strong><br><small>Central de Atendimento e Obras</small></div>
+                <i class="fas fa-times" style="cursor: pointer;" onclick="toggleChat(event)"></i>
+            </div>
+            <div id="chat-messages"></div>
+            <div id="typing-indicator" class="typing" style="margin-left: 20px; font-style: italic; font-size: 0.8rem; color: #888; display: none;">A Texera está analisando...</div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Digite aqui...">
+                <button id="send-chat" onclick="handleUserInput()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
+        <div id="chatbot-btn" onclick="toggleChat(event)"><i class="fas fa-hard-hat"></i></div>
     </div>
 
     <script src="script.js"></script>
